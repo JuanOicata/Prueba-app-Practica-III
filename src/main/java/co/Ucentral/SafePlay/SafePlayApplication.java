@@ -10,4 +10,5 @@ public class SafePlayApplication {
 		SpringApplication.run(SafePlayApplication.class, args);
 	}
 
+	//prueba commit
 }
