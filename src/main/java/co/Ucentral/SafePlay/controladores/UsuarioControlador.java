@@ -2,10 +2,12 @@ package co.Ucentral.SafePlay.controladores;
 
 import co.Ucentral.SafePlay.persistencia.entidades.Usuario;
 import co.Ucentral.SafePlay.servicios.UsuarioServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UsuarioControlador {
 
+    @GetMapping("/")
+    public String mostrarPaginaPrincipal() {
+        return "index"; // Devuelve index.html
+    }
     @Autowired
     private UsuarioServicio usuarioServicio;
-
-    @GetMapping("/")
-    public String mostrarFormularioRegistroRoot(Model model) {
-        model.addAttribute("elusuario", new Usuario());
-        return "registro";
-    }
 
     // Muestra el formulario
     @GetMapping("/registro")
@@ -30,19 +30,16 @@ public class UsuarioControlador {
         return "registro"; // <- nombre del archivo HTML sin extensión
     }
 
-    // Guarda el usuario enviado desde el formulario
     @PostMapping("/almacenar")
-    public String guardarUsuario(@ModelAttribute("elusuario") Usuario usuario) {
+    public String guardarUsuario(@Valid @ModelAttribute("elusuario") Usuario usuario, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "registro"; // Vuelve al formulario si hay errores
+        }
         usuarioServicio.guardar(usuario);
-        return "redirect:/registro"; // puedes redirigir a otra página si quieres
+        return "redirect:/registro";
     }
 
-    @Controller
-    public class TestControlador {
-        @GetMapping("/test")
-        public String test() {
-            return "test";
-        }
-    }
+
+
 
 }

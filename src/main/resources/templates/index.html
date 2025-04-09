@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido a SafePlay</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts para tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #ffffff; /* Blanco */
+            color: #333; /* Gris oscuro para mejor contraste */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            background: #ffffff; /* Blanco */
+            border-bottom: 2px solid #7dcfa7;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: #2f5d50 !important;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #7dcfa7 !important;
+        }
+
+        .hero-section {
+            padding: 100px 0;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9); /* Blanco semitransparente */
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2f5d50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .btn-get-started {
+            background-color: #7dcfa7;
+            border: none;
+            padding: 10px 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-get-started:hover {
+            background-color: #5fbf91;
+            box-shadow: 0 0 10px rgba(93, 180, 138, 0.3);
+            color: #ffffff;
+        }
+
+        .trusted-section {
+            background: #f9f9f9;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .trusted-section h3 {
+            color: #2f5d50;
+            margin-bottom: 1.5rem;
+        }
+
+        .trusted-section img {
+            max-height: 40px;
+            margin: 0 20px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .trusted-section img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .features-section {
+            padding: 50px 0;
+            background: #ffffff;
+        }
+
+        .features-section h3 {
+            color: #2f5d50;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .features-section p {
+            color: #555;
+        }
+
+        .features-section i {
+            color: #7dcfa7;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .mockup-section {
+            padding: 50px 0;
+            background: #f9f9f9;
+        }
+
+        .mockup-section h2 {
+            color: #2f5d50;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .mockup-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .mockup-section li {
+            color: #555;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .mockup-section li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #7dcfa7;
+            position: absolute;
+            left: 0;
+        }
+
+        .alert-success {
+            background-color: #e2f7ed;
+            color: #2f5d50;
+            border-color: #7dcfa7;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">SafePlay</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/registro}">Registro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <h1>Controla tu Experiencia de Juego</h1>
+        <p>Con SafePlay, gestiona tus controles, estadísticas y progresos en tus videojuegos favoritos como nunca antes.</p>
+        <a th:href="@{/registro}" class="btn btn-get-started">¡Comienza Ahora!</a>
+        <p class="mt-3">Confianza de más de 50,000+ jugadores en todo el mundo</p>
+    </div>
+</section>
+
+<!-- Trusted Section -->
+<section class="trusted-section">
+    <div class="container">
+        <h3>Confianza de los Mejores</h3>
+        <div>
+            <img src="https://via.placeholder.com/100x40?text=GameCo" alt="GameCo">
+            <img src="https://via.placeholder.com/100x40?text=PlayZone" alt="PlayZone">
+            <img src="https://via.placeholder.com/100x40?text=PixelPlay" alt="PixelPlay">
+            <img src="https://via.placeholder.com/100x40?text=NeoGamer" alt="NeoGamer">
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fas fa-rocket"></i>
+                <h3>Rápido y Eficiente</h3>
+                <p>Configura tus controles en segundos y empieza a jugar sin demoras.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-plug"></i>
+                <h3>Integraciones Sencillas</h3>
+                <p>Conecta SafePlay con tus plataformas de juego favoritas.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-trophy"></i>
+                <h3>Diseñado para Ganar</h3>
+                <p>Optimiza tu configuración para mejorar tu rendimiento y subir de nivel.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mockup Section -->
+<section class="mockup-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Gaming Setup" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <h2>Todo lo que Necesitas para Jugar</h2>
+                <ul>
+                    <li>Personaliza tus controles para cada juego.</li>
+                    <li>Guarda y sincroniza tus configuraciones en la nube.</li>
+                    <li>Analiza tus estadísticas y mejora tu estrategia.</li>
+                    <li>Diseñado para gamers, por gamers.</li>
+                </ul>
+                <a th:href="@{/registro}" class="btn btn-get-started">Regístrate Ahora</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
