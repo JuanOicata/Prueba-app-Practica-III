@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -14,41 +15,48 @@ public class UsuarioServicio {
 
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
+
+    // Registrar un usuario
     public void registrarUsuario(Usuario usuario) {
         usuarioRepositorio.save(usuario);
     }
 
-    public List<Usuario> obtenerTodos(){
+    // Obtener todos los usuarios
+    public List<Usuario> obtenerTodos() {
         List<Usuario> listado = (List<Usuario>) usuarioRepositorio.findAll();
         return listado;
     }
-    public boolean borrar(Usuario usuario){
-        try{
+
+    // Borrar un usuario
+    public boolean borrar(Usuario usuario) {
+        try {
             usuarioRepositorio.delete(usuario);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
+
+    // Guardar un usuario
     public void guardar(Usuario usuario) {
         usuarioRepositorio.save(usuario);
     }
-    /*public Usuario validarUsuario(String nombreUsuario, String contrasena) {
-        // Buscar el usuario por su nombre de usuario
-        Usuario usuarioEncontrado = usuarioRepositorio.findByUsuario(nombreUsuario).orElse(null);
 
-        if (usuarioEncontrado != null) {
-            // Verificar que la contraseña coincida
-            if (usuarioEncontrado.getContrasena().equals(contrasena)) {
-                // Si la contraseña es correcta, imprimir el nombre del usuario
-                System.out.println("Usuario autenticado: " + usuarioEncontrado.getUsuario());
-                return usuarioEncontrado;  // Retornar el usuario autenticado
-            } else {
-                System.out.println("Contraseña incorrecta");
+    // Buscar usuarios por rol
+    public List<Usuario> obtenerPorRol(String role) {
+        return usuarioRepositorio.findByRole(role);
+    }
+
+    // Validar usuario por nombre de usuario y rol
+    public Optional<Usuario> validarUsuario(String nombreUsuario, String contrasena, String role) {
+        Optional<Usuario> usuarioEncontrado = usuarioRepositorio.findByUsuario(nombreUsuario);
+
+        if (usuarioEncontrado.isPresent()) {
+            Usuario usuario = usuarioEncontrado.get();
+            if (usuario.getContrasena().equals(contrasena) && usuario.getRole().equals(role)) {
+                return Optional.of(usuario);
             }
-        } else {
-            System.out.println("Usuario no encontrado");
         }
-        return null;
-    }*/
+        return Optional.empty(); // Si no se encuentra o la contraseña/rol no coinciden
+    }
 }

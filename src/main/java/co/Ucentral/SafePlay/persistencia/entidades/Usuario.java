@@ -32,6 +32,10 @@ public class Usuario {
     @Pattern(regexp = "\\d+", message = "El teléfono solo puede contener números")
     private String telefono;
 
+    @Column(name = "usu_rol", nullable = false)
+    @NotBlank(message = "El rol no puede estar vacío")
+    private String role;  // Agregado para el rol (jugador o supervisor)
+
     // Getters y setters (o usar Lombok si ya lo tienes funcionando)
     public String getUsuario() { return usuario; }
     public void setUsuario(String usuario) { this.usuario = usuario; }
@@ -43,4 +47,6 @@ public class Usuario {
     public void setCedula(String cedula) { this.cedula = cedula; }
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
