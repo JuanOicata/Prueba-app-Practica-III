@@ -111,17 +111,42 @@
             margin-bottom: 1.5rem;
         }
 
-        .trusted-section img {
-            max-height: 40px;
-            margin: 0 20px;
+        .carousel-item img {
+            max-height: 60px; /* Ajusta el tamaño de las imágenes del carrusel */
+            margin: 0 auto; /* Centra las imágenes horizontalmente */
             filter: grayscale(100%);
             opacity: 0.7;
             transition: all 0.3s ease;
         }
 
-        .trusted-section img:hover {
+        .carousel-item img:hover {
             filter: grayscale(0%);
             opacity: 1;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%; /* Ajusta el tamaño de los controles */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #2f5d50; /* Color de fondo de las flechas */
+            border-radius: 50%;
+        }
+
+        /* Nueva sección para la imagen de fondo */
+        .banner-section {
+            padding: 30px 0;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .banner-section img {
+            width: 100%;
+            max-width: 1200px; /* Limita el ancho máximo para que no sea demasiado grande */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px; /* Bordes redondeados para un mejor diseño */
         }
 
         .features-section {
@@ -219,25 +244,44 @@
     <a th:href="@{/registro}" class="cta-button">Inicia Sesión</a>
 
     <div class="team">
-        <img src= "/images/gamer1.jpeg"  alt="Gamer 1">
-        <img src="/images/gamer2.jpeg"  alt="Gamer 2">
-        <img src="/images/gamer3.jpeg"  alt="Gamer 3">
+        <img src="/images/gamer1.jpeg" alt="Gamer 1">
+        <img src="/images/gamer2.jpeg" alt="Gamer 3">
+        <img src="/images/gamer3.jpeg" alt="Gamer 3">
         <div>
             Hecho Para Gamers,<br>Por Gamers
         </div>
     </div>
 </div>
 
-<!-- Trusted Section -->
+<!-- Trusted Section (Carrusel) -->
 <section class="trusted-section">
     <div class="container">
-        <h3>Confianza de los Mejores</h3>
-        <div>
-            <img src="https://via.placeholder.com/100x40?text=GameCo" alt="GameCo">
-            <img src="https://via.placeholder.com/100x40?text=PlayZone" alt="PlayZone">
-            <img src="https://via.placeholder.com/100x40?text=PixelPlay" alt="PixelPlay">
-            <img src="https://via.placeholder.com/100x40?text=NeoGamer" alt="NeoGamer">
+        <h3>Con la Implementación de las Clasificaciones</h3>
+        <div id="trustedCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/logoPEGI.png" alt="PEGI">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/logoESRB.png" alt="ESRB">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#trustedCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#trustedCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+    </div>
+</section>
+
+<!-- Nueva Sección para la Imagen de Fondo -->
+<section class="banner-section">
+    <div class="container">
+        <img src="/images/fondo1.png" alt="SafePlay Banner">
     </div>
 </section>
 
