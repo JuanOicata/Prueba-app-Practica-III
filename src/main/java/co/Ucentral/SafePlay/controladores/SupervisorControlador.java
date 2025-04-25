@@ -56,11 +56,20 @@ public class SupervisorControlador {
         return "redirect:/supervisor";  // Redirige a la página de supervisor
     }
 
-    // Buscar un videojuego
+    // Mostrar el formulario de búsqueda de videojuego
     @GetMapping("/buscarVideoJuego")
+    public String mostrarFormularioBusqueda() {
+        return "buscarVideoJuego";  // Vista para el formulario de búsqueda
+    }
+
+    // Buscar un videojuego
+    @PostMapping("/buscarVideoJuego")
     public String buscarVideoJuego(@RequestParam String nombre, Model model) {
+        // Buscar el videojuego por nombre
         VideoJuego videoJuego = videoJuegoServicio.buscarVideoJuegoPorNombre(nombre);
+        // Agregar el videojuego encontrado al modelo
         model.addAttribute("videoJuego", videoJuego);
+        // Si no se encuentra el videojuego, este es null, lo cual puede ser mostrado en la vista
         return "buscarResultado";  // Vista con el resultado de la búsqueda
     }
 }
